@@ -12,7 +12,24 @@
                 "command": "python -i \\\"${file}\\\""
                 },
             "linux": {
+                "command": "python3 -i \"${file}\""
+            },
+            "osx": {
                 "command": "python -i \"${file}\""
+            }
+        },
+        {
+            "label": "Test",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "windows": {
+                "command": "python -i \\\"${file}\\\""
+                },
+            "linux": {
+                "command": "help help"
             },
             "osx": {
                 "command": "python -i \"${file}\""

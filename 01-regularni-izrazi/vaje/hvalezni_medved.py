@@ -25,6 +25,11 @@ medved. Zvrhano zibelko sladkih hrušk mi je prinesel za en sam izdrt trn"."""
 # >>> find_words(test_text, 'de')
 # {'izdere', 'debel', 'oddide', 'začudeno'}
 ###############################################################################
+import re
+def find_words(niz, podniz):
+    if set:
+        return set(re.findall(r'\w*' +podniz +r'\w*', niz))
+    return re.findall(r'\w*' +podniz +r'\w*', niz)
 
 
 ###############################################################################
@@ -34,7 +39,13 @@ medved. Zvrhano zibelko sladkih hrušk mi je prinesel za en sam izdrt trn"."""
 # >>> find_prefix(test_text, 'zi')
 # {'zibala', 'zibel', 'zibelko'}
 ###############################################################################
+def find_word(niz, in_set=False):
+    if in_set:
+        return set(re.findall(r'\w+\b', niz))
+    return re.findall(r'\w+\b', niz)
 
+def find_prefix(niz, predpona):
+    return {beseda for beseda in find_word(niz) if beseda.startswith(predpona)}
 
 ###############################################################################
 # 3) Sestavite funkcijo [find_suffix], ki vrne množico vseh besed, ki se
@@ -43,7 +54,8 @@ medved. Zvrhano zibelko sladkih hrušk mi je prinesel za en sam izdrt trn"."""
 # >>> find_suffix(test_text, 'la')
 # {'zibala', 'razveselila', 'prestrašila', 'šivala', 'opazila', 'tla'}
 ###############################################################################
-
+def find_suffix(niz, predpona):
+    return {beseda for beseda in find_word(niz) if beseda.endswith(predpona)}
 
 ###############################################################################
 # 4) Sestavite funkcijo [double_letters], ki sprejme niz in vrne množico vseh
@@ -52,3 +64,6 @@ medved. Zvrhano zibelko sladkih hrušk mi je prinesel za en sam izdrt trn"."""
 # >>> double_letters('A volunteer is worth twenty pressed men.')
 # {'volunteer', 'pressed'}
 ###############################################################################
+def double_letters(text):
+    pattern = r'\b\w*(?P<char>\w)(?P=char)\w*\b'
+    return {m.group(0) for m in re.finditer(pattern, text)}
