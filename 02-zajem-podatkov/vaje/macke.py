@@ -7,7 +7,7 @@ import re
 # Najprej definirajmo nekaj pomožnih orodij za pridobivanje podatkov s spleta.
 ###############################################################################
 
-# definiratje URL glavne strani bolhe za oglase z mačkami
+# definirajte URL glavne strani bolhe za oglase z mačkami
 cats_frontpage_url = 'http://www.bolha.com/zivali/male-zivali/macke/'
 # mapa, v katero bomo shranili podatke
 cat_directory = 'data'
@@ -18,8 +18,13 @@ csv_filename = 'podatki.csv'
 # lepota
 dir_name = os.path.dirname(__file__)
 
+<<<<<<< HEAD
 def download_url_to_string(url):  # passed 10:37
     """Funkcija kot argument sprejme niz in puskuša vrniti vsebino te spletne
+=======
+def download_url_to_string(url):
+    """Funkcija kot argument sprejme niz in poskusi vrniti vsebino te spletne
+>>>>>>> dc12fa0fb17f7cac4f37ae832889eec2c2fd38a6
     strani kot niz. V primeru, da med izvajanje pride do napake vrne None.
     """
     try:
@@ -67,10 +72,15 @@ def save_frontpage(page, directory, filename):
 
 
 def read_file_to_string(directory, filename):
+<<<<<<< HEAD
     """Funkcija vrne celotno vsebino datoteke "directory"/"filename" kot niz"""
     full_name = os.path.join(dir_name, directory, filename)
     with open(full_name, encoding='utf-8') as datoteka:
         return datoteka.read()
+=======
+    """Funkcija vrne celotno vsebino datoteke "directory"/"filename" kot niz."""
+    raise NotImplementedError()
+>>>>>>> dc12fa0fb17f7cac4f37ae832889eec2c2fd38a6
 
 
 # Definirajte funkcijo, ki sprejme niz, ki predstavlja vsebino spletne strani,
@@ -80,6 +90,7 @@ def read_file_to_string(directory, filename):
 
 
 def page_to_ads(page_content):
+<<<<<<< HEAD
     """Funkcija poišče posamezne ogllase, ki se nahajajo v spletni strani in
     vrne njih seznam"""
     vzorec = (r'(?P<oglas><li class="EntityList-item EntityList-item--Regular[\S\s\n]+?</li>)'
@@ -89,13 +100,20 @@ def page_to_ads(page_content):
         print(zadetek.groupdict().keys())
         ans.append(zadetek.groupdict().get('oglas'))
     return ans
+=======
+    """Funkcija poišče posamezne oglase, ki se nahajajo v spletni strani in
+    vrne seznam oglasov."""
+    raise NotImplementedError()
+
+>>>>>>> dc12fa0fb17f7cac4f37ae832889eec2c2fd38a6
 
 # Definirajte funkcijo, ki sprejme niz, ki predstavlja oglas, in izlušči
-# podatke o imenu, ceni in opisu v oglasu.
+# podatke o imenu, lokaciji, datumu objave in ceni v oglasu.
 
 
 def get_dict_from_ad_block(block):
     """Funkcija iz niza za posamezen oglasni blok izlušči podatke o imenu, ceni
+<<<<<<< HEAD
     in opisu ter vrne slovar, ki vsebuje ustrezne podatke
     """
     # blok je str
@@ -108,6 +126,10 @@ def get_dict_from_ad_block(block):
     )
     ans = re.search(vzorec, block)
     return ans
+=======
+    in opisu ter vrne slovar, ki vsebuje ustrezne podatke."""
+    raise NotImplementedError()
+>>>>>>> dc12fa0fb17f7cac4f37ae832889eec2c2fd38a6
 
 
 # Definirajte funkcijo, ki sprejme ime in lokacijo datoteke, ki vsebuje
@@ -133,7 +155,7 @@ def write_csv(fieldnames, rows, directory, filename):
     """
     os.makedirs(directory, exist_ok=True)
     path = os.path.join(directory, filename)
-    with open(path, 'w') as csv_file:
+    with open(path, 'w', encoding='utf-8') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
         for row in rows:
@@ -148,10 +170,8 @@ def write_csv(fieldnames, rows, directory, filename):
 
 def write_cat_ads_to_csv(ads, directory, filename):
     """Funkcija vse podatke iz parametra "ads" zapiše v csv datoteko podano s
-    parametroma "directory"/"filename". Funkcija predpostavi, da sa ključi vseh
-    sloverjev parametra ads enaki in je seznam ads neprazen.
-
-    """
+    parametroma "directory"/"filename". Funkcija predpostavi, da so ključi vseh
+    slovarjev parametra ads enaki in je seznam ads neprazen."""
     # Stavek assert preveri da zahteva velja
     # Če drži se program normalno izvaja, drugače pa sproži napako
     # Prednost je v tem, da ga lahko pod določenimi pogoji izklopimo v
@@ -174,6 +194,7 @@ def main(redownload=True, reparse=True):
     #     return 'resnica'
 
     # Iz lokalne (html) datoteke preberemo podatke
+<<<<<<< HEAD
     podatki = read_file_to_string(cat_directory, frontpage_filename)
     seznam_oglasov = page_to_ads(podatki)
     # Podatke prebermo v lepšo obliko (seznam slovarjev)
@@ -184,6 +205,15 @@ def main(redownload=True, reparse=True):
    # write_cat_ads_to_csv(seznam_slovarjev, cat_directory, frontpage_filename)
     # Dodatno: S pomočjo parameteov funkcije main omogoči nadzor, ali se
     # celotna spletna stran ob vsakem zagon prense (četudi že obstaja)
+=======
+
+    # Podatke preberemo v lepšo obliko (seznam slovarjev)
+
+    # Podatke shranimo v csv datoteko
+
+    # Dodatno: S pomočjo parametrov funkcije main omogoči nadzor, ali se
+    # celotna spletna stran ob vsakem zagon prenese (četudi že obstaja)
+>>>>>>> dc12fa0fb17f7cac4f37ae832889eec2c2fd38a6
     # in enako za pretvorbo
 
     #raise NotImplementedError()
