@@ -51,6 +51,23 @@
             "osx": {
                 "command": "ocaml -init \"${file}\""
             }
+        },
+        {
+            "label": "OCaml Utop",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "windows": {
+                "command": "utop -init \\\"${file}\\\""
+                },
+            "linux": {
+                "command": "utop -init \"${file}\""
+            },
+            "osx": {
+                "command": "utop -init \"${file}\""
+            }
         }
     ]
 }
