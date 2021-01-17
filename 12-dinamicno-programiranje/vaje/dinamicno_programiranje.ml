@@ -21,6 +21,25 @@ let test_matrix =
      [| 2 ; 4 ; 5 |];
      [| 7 ; 0 ; 1 |] |]
 
+let matrix_below matrix = 
+   let len = Array.length matrix in 
+   Array.sub matrix 1 (len - 1)
+
+(* dj nauč se razmišljat no pls kla pa indexi*)
+let max_cheese matrix = 
+   let visina = Array.length matrix in 
+   if visina = 0 then 0
+   else 
+   let sirina = Array.length (matrix.(0)) in 
+   let rec f s v =
+      if v > (visina - 1) || s > (sirina - 1) then 0
+      else 
+         let right = f (s+1) v in 
+         let down = f s (v + 1) in 
+         matrix.(v).(s) + (max right down) 
+   in 
+   f 0 0
+
 (*----------------------------------------------------------------------------*]
  Poleg količine sira, ki jo miška lahko poje, jo zanima tudi točna pot, ki naj
  jo ubere, da bo prišla do ustrezne pojedine.
@@ -38,6 +57,22 @@ let test_matrix =
 
 type mouse_direction = Down | Right
 
+let optimal_path matrix = 
+   let visina = Array.length matrix in 
+   if visina = 0 then []
+   else 
+   let sirina = Array.length (matrix.(0)) in 
+   let rec f s v =
+      if v > (visina - 1) || s > (sirina - 1) then (0, [])
+      else 
+         let right = f (s+1) v in 
+         let down = f s (v + 1) in 
+         let curr = matrix.(v).(s) in 
+         (* bolj so mi všeč poti, ki gredo dol*)
+         if fst right <= fst down then (curr + fst down, Down::(snd down))
+         else  (curr + fst right, Right::(snd right))
+   in 
+   f 0 0 |> snd
 
 (*----------------------------------------------------------------------------*]
  Rešujemo problem sestavljanja alternirajoče obarvanih stolpov. Imamo štiri

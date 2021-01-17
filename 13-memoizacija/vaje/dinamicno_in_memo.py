@@ -8,9 +8,24 @@ from functools import lru_cache
 # poišče najdaljše (ne strogo) naraščajoce podzaporedje števil v seznamu.
 #
 # Primer: v seznamu `[2, 3, 6, 8, 4, 4, 6, 7, 12, 8, 9]` kot rezultat vrne
-# podzaporedje `[2, 3, 4, 4, 6, 7, 8, 9]`.
+# podzaporedje `[2, 3, 4, 4, 6, 7, 8, 9]`. -- dolzina = 8
 # -----------------------------------------------------------------------------
-
+def najdaljse_narascajoce_podzaporedje(l):
+    @lru_cache
+    def podzaporedje(i, zadnji):
+        # smo na koncu
+        if i>= len(l):
+            return [] 
+        if l[i] >= zadnji:
+            vzamemo = [l[i]] + podzaporedje(i + 1, l[i])
+            ne_vzamemo = podzaporedje(i+1, zadnji)
+            if len(vzamemo) >= len(ne_vzamemo):
+                return vzamemo
+            return ne_vzamemo
+        else:
+            return podzaporedje(i+1, zadnji)
+            
+    podzaporedje(0, float("-inf"))
 # -----------------------------------------------------------------------------
 # Rešitev sedaj popravite tako, da funkcija `vsa_najdaljsa` vrne seznam vseh
 # najdaljših naraščajočih podzaporedij.
@@ -42,6 +57,26 @@ from functools import lru_cache
 # treh skokih, v močvari `[4, 1, 8, 2, 11, 1, 1, 1, 1, 1]` pa potrebuje zgolj
 # dva.
 # =============================================================================
+def zabica(mocvara):
+    """
+    lokvanj, energija
+    iz lokvana mamo energija možnih
+    """
+    d = len(mocvara)
+    
+    @lru_cache
+    def f(lokvanj, energija):
+        if lokvanj + energija >= d:
+            return 1
+        m = float("inf")
+        a = 1
+        while energija >= a :
+            #do sm lahko skočno
+            index = lokvanj + a 
+            m = min(m, f(index, energija - a + mocvara[index]) + 1)
+            a += 1
+        return m 
+    return f(0, mocvara[0])
 
 
 
