@@ -96,7 +96,7 @@ Naj bo $N(h)$ najmanjše število vozlišč v kakršnemkoli AVL drevesu višine 
 
 - $N(0) = 0$, saj je prazno drevo najmanjše AVL drevo višine vsaj $0$;
 - $N(1) = 1$, saj mora drevo višine vsaj $1$ vsebovati vsaj en element, drevo s samo enim elementom pa je AVL drevo;
-- če je $h \ge h'$, je $N(h) \ge N(h')$, saj ima vsako drevo z višino vsaj $h$ tudi višino vsaj $h'$.
+- če je $h \ge h'$, je $N(h) \ge N(h')$, saj ima vsako drevo z višino vsaj $h$ tudi poddrevo z višino višino vsaj $h'$.
 
 Vzemimo poljubno AVL drevo $T$ višine $h$ s poddrevesoma $L$ in $D$. Vsaj eden od njegovih otrok ima višino $h - 1$. Brez škode za splošnost privzemimo, da je to $L$. Ker je $T$ AVL drevo, se morata višini $L$ in $D$ razlikovati za največ $1$, torej ima drevo $D$ lahko le višini $h - 1$ ali $h - 2$. Po definiciji funkcije $N$ ima drevo $L$ vsaj $N(h - 1)$, drevo $D$ pa vsaj $N(h - 2)$ elementov. Tedaj ima drevo $T$ vsaj $1 + N(h - 1) + N(h - 2)$ elementov. Torej velja
 
